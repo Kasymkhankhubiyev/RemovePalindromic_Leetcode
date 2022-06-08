@@ -1,5 +1,18 @@
 def removePalindromicSub(string):
-    pass
+    steps = 0
+    while len(string) > 0:
+        if check_palindromic(string):
+            steps += 1
+            string = ''
+        else:
+            for i in range(len(string)):
+                if check_palindromic(string[:len(string) - i]):
+                    # print(string[:len(string)-i])
+                    steps += 1
+                    string = string[len(string) - i:]
+                    print(string)
+                    break
+    return steps
 
 def check_palindromic(string):
     if string == string[::-1]:
@@ -31,19 +44,7 @@ if __name__ == '__main__':
     while run:
         string = input()
         if check_input(string):
-            steps = 0
-            while len(string) > 0:
-                if check_palindromic(string):
-                    steps += 1
-                    string = ''
-                else:
-                    for i in range(len(string)):
-                        if check_palindromic(string[:len(string)-i]):
-                            #print(string[:len(string)-i])
-                            steps+= 1
-                            string = string[len(string)-i:]
-                            print(string)
-                            break
+            steps = removePalindromicSub(string)
             print(steps)
 
         else:
